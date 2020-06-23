@@ -5,12 +5,61 @@
   background-color:#ff2015;
 }
 
+*{outline:1px dotted black;}
+
 .button{
-  margin:1vw;
-  height:10vw;
+  margin:5px;
+  height:95px;
   min-height:75px;
-  width:10vw;
+  width:95px;
   min-width:75px;
+  position: relative;
+}
+
+.iconRow{
+  position: relative;
+  margin:20px;
+  width:80%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height:100px;
+  border-width: 5px;
+  border-top:rgba(0,0,0,.5);
+  border-bottom:rgba(0,0,0,.5);
+}
+
+/*Flashing Button on Click*/
+.button:after {
+  pointer-events: none;
+  content: "";
+  background: #90EE90;
+  display: block;
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  opacity: 0;
+  width:0%;
+  height:0%;
+  transition: all 0.8s
+}
+.button:active:after {
+  opacity: .5;
+  transition: 0s;
+  width:100%;
+  height:100%;
+}
+
+.barAbove:before{
+  position: absolute;
+  bottom:calc(100% + 15px);
+  left:50%;
+  transform:translate(-50%,-50%);
+  content:"";
+  height:5px;
+  width:90%;
+  background-color: rgba(0,0,0,.3);
 }
 
 .flexCenter{
@@ -22,8 +71,8 @@
 .MenuButton{
   position: fixed;
   z-index: 1000;
-  top:-2.5vw;
-  right:-2.5vw;
+  top:-25px;
+  right:-25px;
   border-radius: 50%;
   background-color:white;
 }
@@ -59,4 +108,10 @@
 /**{outline:1px dotted black;}*/
 
 
-
+.kidsKeyboardButton{
+  background-color:#72d3fe;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 5px;
+}

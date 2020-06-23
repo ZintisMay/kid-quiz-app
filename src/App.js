@@ -2,6 +2,7 @@ import React from 'react';
 import Login from './components/Login.js';
 import Menu from './components/Menu.js';
 import IconKeyboard from './components/IconKeyboard.js';
+import {speak, silence} from './utils/speech.js'
 import './App.css';
 
 import keyboardIconList from './data/keyboardIconList'
@@ -11,9 +12,13 @@ class App extends React.Component {
     super(props)
     this.state = {
       name:'myname',
-      keyboardIsWritingTo:"name",
+
+      keyboardIsWritingTo:"loginName",
       keyboardIsOpen:false,
       keyboardType:0,
+
+      loginName:[],
+      loginHouse:[],
 
       loginIsOpen:false,
       menuIsOpen:false,
@@ -21,9 +26,9 @@ class App extends React.Component {
     console.log(keyboardIconList)
   }
 
-  setKeyboardTargetAndOpen = (target) => {
-    this.setState({keyboardIsOpen:true, keyboardIsWritingTo:target})
-  }
+  // setKeyboardTargetAndOpen = (target) => {
+  //   this.setState({keyboardIsOpen:true, keyboardIsWritingTo:target})
+  // }
 
   keyboardWrite = (val) => {
     let newState = {...this.state}
@@ -31,20 +36,26 @@ class App extends React.Component {
     this.setState(newState)
   }
 
-  alterState = (key,value) => {
+  // alterState = (key,value) => {
+  //   let newState = {...this.state}
+  //   newState[key] = value
+  //   this.setState(newState)
+  // }
+
+  alterState = (alterObj) => {
     let newState = {...this.state}
-    newState[key] = value
+    for(let key in alterObj){
+      newState[key] = alterObj[key]
+    }
     this.setState(newState)
   }
 
   render(){
     return (
       <div className="App">
-       APP {this.state.name}
+       APP {this.state.loginName}
 
-       <div onClick={()=>{this.setState({keyboardIsOpen:!this.state.keyboardIsOpen})}}>
-         Open keyboard
-       </div>
+
 
        <div class={`button MenuButton flexCenter ${this.state.menuIsOpen ? "cross":""}`} onClick={()=>{this.setState({menuIsOpen:!this.state.menuIsOpen})}}>
          <div class="MenuLine A"></div>
@@ -53,11 +64,11 @@ class App extends React.Component {
        </div>
 
 
-       <Login alterState={this.alterState} setKeyboardTargetAndOpen={this.setKeyboardTargetAndOpen}/>
+       <Login state={this.state} alterState={this.alterState}  setKeyboardTargetAndOpen={this.setKeyboardTargetAndOpen}/>
 
-       <Menu menuIsOpen={this.state.menuIsOpen} />
+       <Menu menuIsOpen={this.state.menuIsOpen} state={this.state} alterState = {this.alterState} />
 
-       <IconKeyboard keyboardIsOpen={this.state.keyboardIsOpen} keyboardIconList={keyboardIconList} keyboardWrite={this.keyboardWrite} keyboardIsWritingTo={this.keyboardIsWritingTo} alterState = {this.alterState}/>
+       <IconKeyboard keyboardIsOpen={this.state.keyboardIsOpen} keyboardIconList={keyboardIconList} keyboardWrite={this.keyboardWrite} keyboardIsWritingTo={this.keyboardIsWritingTo} alterState = {this.alterState} />
 
       </div>
     );

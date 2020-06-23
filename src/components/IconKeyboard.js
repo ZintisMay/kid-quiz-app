@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { speak, silence } from '../utils/speech.js';
 import './IconKeyboard.css';
 
 const capitalize = (s) => {
@@ -10,14 +11,22 @@ function IconKeyboard(props) {
 
   const [animalArray, setAnimalArray] = useState([]);
 
+  useEffect(() => {
+    // Update the document title using the browser API
+  });
+
   function addAnimalIcon(word){
-  	window.speechSynthesis.cancel()
-  	speak(word)
+  	console.log(animalArray)
+  	if(animalArray.length >= 3){
+  		return null
+  	};
+  	silence()
+		speak(word)
 		setAnimalArray([...animalArray, word])
   }
 
   function removeAnimalIcon(index){
-  	window.speechSynthesis.cancel()
+  	silence()
   	speak("no " + animalArray[index])
 		setAnimalArray([...animalArray.filter((x, ind)=>{return ind != index})])
   }
@@ -28,21 +37,18 @@ function IconKeyboard(props) {
 
   	props.keyboardWrite(animalArray.map((item)=>{
   	 return capitalize(item);
-  	}).join(""))
+  	}))
 
-  	setTimeout(()=>{
+  	let closer = setTimeout(()=>{
   		close()
-  	},1000)
+  	},1500)
   }
   
   function close(){
-  	setAnimalArray([])
-  	props.alterState("keyboardIsOpen", false)
-  }
-
-  function speak(word){
-		var msg = new SpeechSynthesisUtterance(word);
-		window.speechSynthesis.speak(msg);
+  	setTimeout(()=>{
+  		setAnimalArray([])
+  	},500)
+    props.alterState({"keyboardIsOpen":false,"keyboardIsWritingTo":""})
   }
 
   //Go button is in the corner with the closeButton
@@ -72,7 +78,7 @@ function IconKeyboard(props) {
 					 </div>)
 	      })}
 			</div>
-			<div className="keyArea">
+			<div className="keyArea barAbove">
         {props.keyboardIconList.map(item=>{
 	       	return (<div 
 		       	key={item}

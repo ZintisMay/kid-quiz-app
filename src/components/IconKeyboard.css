@@ -6,11 +6,11 @@
 }
 
 .IconKeyboard{
+	z-index: 1000;
 	position: fixed;
 	top:100%;
 	left:0;
 	width:100vw;
-	/*height:50vh;*/
 	padding:5vh 0;
 	background-color:#FFB347;
 	transition:.5s linear ;
@@ -36,6 +36,7 @@
 	flex-wrap: wrap;
 }
 .keyArea{
+	min-height:120px;
 	margin-top:20px;
 	display: flex;
 	justify-content: center;
@@ -43,34 +44,19 @@
 	flex-wrap: wrap;
 	position: relative;
 }
-.keyArea:before{
-	position: absolute;
-	bottom:calc(100% + 10px);
-	content:"";
-	height:5px;
-	width:90%;
-	background-color: rgba(0,0,0,.3);
-}
 
-.kidsKeyboardButton{
-	background-color:#72d3fe;
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
-	border-radius: 5px;
-}
-
-.goButton,
-.closeButton{
+.kidsKeyboardButton.goButton,
+.kidsKeyboardButton.closeButton{
 	position: absolute;
+	z-index: 150;
 	border-radius: 50%;
 	bottom:-2vw;
 }
-.goButton{
-	left:-2.5vw;
+.kidsKeyboardButton.goButton{
+	left:-3vw;
 	background-color:#77dd77;
 }
-.closeButton{
-	right:-2.5vw;
+.kidsKeyboardButton.closeButton{
+	right:-3vw;
 	background-color:red;
 }

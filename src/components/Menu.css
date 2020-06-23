@@ -7,7 +7,7 @@
 
 .Menu{
 	position: fixed;
-	min-height:calc(8.5vw);
+	height:calc(75px);
 	bottom:100%;
 	left:0;
 	width:97vw;
@@ -19,4 +19,18 @@
 	flex-wrap: wrap;
 	justify-content: flex-start;
 	align-items: center;
+}
+
+.iconRow.MenuCredentials{
+	position: absolute;
+	height:50px;
+	top:100%;
+	margin:10px;
+
+}
+.iconRow.MenuCredentials .kidsKeyboardButton{
+	min-height: 0;
+	min-width: 0;
+	height:50px;
+	width:50px;
 }
