@@ -10,12 +10,15 @@ import keyboardIconList from './data/keyboardIconList'
 class App extends React.Component {
   constructor(props){
     super(props)
+    window.activeSpeechSynthesis = true
     this.state = {
       name:'myname',
 
       keyboardIsWritingTo:"loginName",
       keyboardIsOpen:false,
       keyboardType:0,
+
+      activeSpeechSynthesis:window.activeSpeechSynthesis,
 
       loginName:[],
       loginHouse:[],
@@ -42,6 +45,19 @@ class App extends React.Component {
   //   this.setState(newState)
   // }
 
+  speechSynthesisToggle = () => {
+    console.log(this.state, window.activeSpeechSynthesis)
+    silence()
+    if(window.activeSpeechSynthesis){
+      speak("sound off")
+      window.activeSpeechSynthesis = false
+    }else{
+      window.activeSpeechSynthesis = true
+      speak("sound on")
+    }
+    this.setState({activeSpeechSynthesis: window.activeSpeechSynthesis})
+  }
+
   alterState = (alterObj) => {
     let newState = {...this.state}
     for(let key in alterObj){
@@ -57,7 +73,7 @@ class App extends React.Component {
 
 
 
-       <div class={`button MenuButton flexCenter ${this.state.menuIsOpen ? "cross":""}`} onClick={()=>{this.setState({menuIsOpen:!this.state.menuIsOpen})}}>
+       <div class={`button MenuButton RoundedButton flexCenter ${this.state.menuIsOpen ? "cross":""}`} onClick={()=>{this.setState({menuIsOpen:!this.state.menuIsOpen})}}>
          <div class="MenuLine A"></div>
          <div class="MenuLine B"></div>
          <div class="MenuLine C"></div>
@@ -66,9 +82,9 @@ class App extends React.Component {
 
        <Login state={this.state} alterState={this.alterState}  setKeyboardTargetAndOpen={this.setKeyboardTargetAndOpen}/>
 
-       <Menu menuIsOpen={this.state.menuIsOpen} state={this.state} alterState = {this.alterState} />
+       <Menu menuIsOpen={this.state.menuIsOpen} state={this.state} alterState = {this.alterState} speechSynthesisToggle={this.speechSynthesisToggle}/>
 
-       <IconKeyboard keyboardIsOpen={this.state.keyboardIsOpen} keyboardIconList={keyboardIconList} keyboardWrite={this.keyboardWrite} keyboardIsWritingTo={this.keyboardIsWritingTo} alterState = {this.alterState} />
+       <IconKeyboard keyboardIsOpen={this.state.keyboardIsOpen} keyboardIconList={keyboardIconList} keyboardWrite={this.keyboardWrite} keyboardIsWritingTo={this.keyboardIsWritingTo} alterState = {this.alterState} state={this.state}/>
 
       </div>
     );

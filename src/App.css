@@ -44,6 +44,9 @@
   height:0%;
   transition: all 0.8s
 }
+.button.RoundedButton:after{
+  border-radius: 50%;
+}
 .button:active:after {
   opacity: .5;
   transition: 0s;
@@ -68,12 +71,15 @@
   align-items: center;
 }
 
+div.RoundedButton{
+  border-radius: 50%;
+}
+
 .MenuButton{
   position: fixed;
   z-index: 1000;
   top:-25px;
   right:-25px;
-  border-radius: 50%;
   background-color:white;
 }
 

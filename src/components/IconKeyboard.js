@@ -39,9 +39,10 @@ function IconKeyboard(props) {
   	 return capitalize(item);
   	}))
 
-  	let closer = setTimeout(()=>{
-  		close()
-  	},1500)
+    let waitTime = window.activeSpeechSynthesis ? 1500 : 0;
+    setTimeout(()=>{
+      close()
+    }, waitTime)
   }
   
   function close(){
@@ -53,15 +54,15 @@ function IconKeyboard(props) {
 
   //Go button is in the corner with the closeButton
   return (
-    <div className={`IconKeyboard ${props.keyboardIsOpen ? "onScreen":"offScreen"}`}>
+    <div className={`IconKeyboard ${props.state.keyboardIsOpen ? "onScreen":"offScreen"}`}>
 			<div 
-				 	className="button kidsKeyboardButton goButton" 
+				 	className="button kidsKeyboardButton RoundedButton goButton" 
 				 	onClick={go}
 				 	style={{backgroundImage:`url(/checkmarkIcon.png)`}}
 				 	>
 			</div>
 			<div 
-				 	className="button kidsKeyboardButton closeButton" 
+				 	className="button kidsKeyboardButton RoundedButton closeButton" 
 				 	onClick={close}
 				 	style={{backgroundImage:`url(/xIcon.png)`}}
 				 	>

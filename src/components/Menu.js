@@ -11,14 +11,16 @@ function Menu(props) {
 
     	<div className={`Menu ${props.menuIsOpen ? "onScreen":"offScreen"}`}>
 
-        <div onClick={()=>{props.alterState({keyboardIsOpen:!props.state.keyboardIsOpen,menuIsOpen:false})}}>
-          Open keyboard
-        </div>
-
         <div onClick={()=>{
          props.alterState({loginIsOpen:!props.state.loginIsOpen, menuIsOpen:false})
         }}>
           Open login
+        </div>
+
+        <div onClick={()=>{
+        	props.speechSynthesisToggle()
+        }}>
+          {props.state.activeSpeechSynthesis ? "Turn Off Sounds" : "Turn On Sound"}
         </div>
 
        <div className = "iconRow MenuCredentials">
@@ -26,7 +28,7 @@ function Menu(props) {
 	          <div 
             className="button kidsKeyboardButton category" 
             style={{backgroundImage:`url(/personIcon.png)`}}
-               onClick={()=>{speak("name")}}
+               onClick={()=>{silence();speak("name")}}
             >
 	          </div>
         	}
@@ -35,7 +37,7 @@ function Menu(props) {
                key={item}
                className="button kidsKeyboardButton" 
                style={{backgroundImage:`url(/${item}Icon.png)`}}
-               onClick={()=>{speak(item)}}
+               onClick={()=>{silence();speak(item)}}
                >
              </div>)
           })}
@@ -43,7 +45,7 @@ function Menu(props) {
           	<div 
             className="button kidsKeyboardButton category" 
             style={{backgroundImage:`url(/houseIcon.png)`}}
-            onClick={()=>{speak("house")}}
+            onClick={()=>{silence();speak("house")}}
             >
           	</div>
         	}
@@ -52,7 +54,7 @@ function Menu(props) {
                key={item}
                className="button kidsKeyboardButton" 
                style={{backgroundImage:`url(/${item}Icon.png)`}}
-               onClick={()=>{speak(item)}}
+               onClick={()=>{silence();speak(item)}}
                >
              </div>)
           })}

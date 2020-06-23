@@ -49,7 +49,6 @@
 .kidsKeyboardButton.closeButton{
 	position: absolute;
 	z-index: 150;
-	border-radius: 50%;
 	bottom:-2vw;
 }
 .kidsKeyboardButton.goButton{
