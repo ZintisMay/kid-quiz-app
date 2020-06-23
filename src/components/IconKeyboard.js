@@ -4,17 +4,17 @@ import './IconKeyboard.css';
 function IconKeyboard(props) {
 
   const [animalPhrase, setAnimalPhrase] = useState([]);
- 
+
   function addAnimalIcon(word){
   	speak(word)
 		setAnimalPhrase([...animalPhrase, word])
   }
 
-  function removeAnimalIcon(word){
-  	speak("no " + word)
-		setAnimalPhrase([...animalPhrase.filter((x)=>{return x != word})])
+  function removeAnimalIcon(index){
+  	window.speechSynthesis.cancel()
+  	speak("no " + animalPhrase[index])
+		setAnimalPhrase([...animalPhrase.filter((x, ind)=>{return ind != index})])
   }
-
 
   function go(){
   	speak(animalPhrase.join(" "))
@@ -35,11 +35,11 @@ function IconKeyboard(props) {
 						 	style={{backgroundImage:`url(/checkmarkIcon.png)`}}
 						 	>
 					</div>
-          {animalPhrase.map(item=>{
+          {animalPhrase.map((item, index)=>{
 		       	return (<div 
 			       	key={item}
 						 	className="kidsKeyboardButton" 
-						 	onClick={()=>{removeAnimalIcon(item)}}
+						 	onClick={()=>{removeAnimalIcon(index)}}
 						 	style={{backgroundImage:`url(/${item}Icon.png)`}}
 						 	>
 						 </div>)
