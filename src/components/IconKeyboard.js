@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { speak, silence } from '../utils/speech.js';
+import {capitalize} from '../utils/utils.js'
 import './IconKeyboard.css';
-
-const capitalize = (s) => {
-  if (typeof s !== 'string') return ''
-  return s.charAt(0).toUpperCase() + s.slice(1)
-}
 
 function IconKeyboard(props) {
 
@@ -35,14 +31,18 @@ function IconKeyboard(props) {
 
   	speak(animalArray.join(" "))
 
-  	props.keyboardWrite(animalArray.map((item)=>{
-  	 return capitalize(item);
-  	}))
+  	props.keyboardWrite(animalArray)
 
-    let waitTime = window.activeSpeechSynthesis ? 1500 : 0;
+    let waitTime = window.activeSpeechSynthesis ? 500 : 0;
     setTimeout(()=>{
       close()
     }, waitTime)
+  }
+
+  function exit(){
+    setAnimalArray([])
+    props.keyboardWrite([])
+    close()
   }
   
   function close(){
@@ -63,7 +63,7 @@ function IconKeyboard(props) {
 			</div>
 			<div 
 				 	className="button kidsKeyboardButton RoundedButton closeButton" 
-				 	onClick={close}
+				 	onClick={exit}
 				 	style={{backgroundImage:`url(/xIcon.png)`}}
 				 	>
 			</div>

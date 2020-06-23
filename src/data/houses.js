@@ -33,7 +33,7 @@ const dummyQuiz = {
 	]
 }
 
-const house = {
+const houses = {
 	house: {
 		teacher:"",
 		students:[],
@@ -42,5 +42,5 @@ const house = {
 		}
 	}
 }
-export default house;
+export default houses;
 

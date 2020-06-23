@@ -34,3 +34,14 @@
 	height:50px;
 	width:50px;
 }
+div.loginSmallIcon,
+div.loginBigIcon{
+	height:50px;
+	width:50px;
+	min-height: 50px;
+	min-width: 50px;
+	margin:0 10px;
+}
+div.loginBigIcon{
+	width:150px;
+}

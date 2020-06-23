@@ -39,6 +39,7 @@ function Login(props) {
 
     return (
       <div className={`Login ${props.state.loginIsOpen ? "open" : ""}`}>
+        <h1>Login</h1>
         <div className="iconRow">
           <div 
             onClick={enterName}
@@ -74,12 +75,16 @@ function Login(props) {
           })}
         </div>
         <div className="iconRow center barAbove">
-          <div 
-            onClick={login}
-            className="button kidsKeyboardButton category" 
-            style={{backgroundImage:`url(/arrowRightIcon.png)`}}
-            >
-          </div>
+          {
+            ['person','arrowRight','house'].map((item)=>{
+              return (<div 
+                onClick={login}
+                className="button kidsKeyboardButton category" 
+                style={{backgroundImage:`url(/${item}Icon.png)`}}
+                >
+              </div>)
+            })
+          }
         </div>
       </div>
     );

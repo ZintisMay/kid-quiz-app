@@ -11,16 +11,15 @@ function Menu(props) {
 
     	<div className={`Menu ${props.menuIsOpen ? "onScreen":"offScreen"}`}>
 
-        <div onClick={()=>{
-         props.alterState({loginIsOpen:!props.state.loginIsOpen, menuIsOpen:false})
+        <div className=" button kidsKeyboardButton loginBigIcon" style={{backgroundImage:`url(/loginBigIcon.png)`}} onClick={()=>{
+         props.alterState({loginIsOpen:!props.state.loginIsOpen})
         }}>
-          Open login
+          
         </div>
 
-        <div onClick={()=>{
+        <div className=" button kidsKeyboardButton loginSmallIcon" style={{backgroundImage:`url(/${props.state.activeSpeechSynthesis ? "soundOn" : "soundOff"}Icon.png)`}} onClick={()=>{
         	props.speechSynthesisToggle()
         }}>
-          {props.state.activeSpeechSynthesis ? "Turn Off Sounds" : "Turn On Sound"}
         </div>
 
        <div className = "iconRow MenuCredentials">

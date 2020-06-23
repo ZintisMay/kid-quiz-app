@@ -6,11 +6,13 @@ import {speak, silence} from './utils/speech.js'
 import './App.css';
 
 import keyboardIconList from './data/keyboardIconList'
-import dummyQuiz from './data/dummyQuiz'
+import houses from './data/houses.js'
 
 class App extends React.Component {
+
   constructor(props){
     super(props)
+    //Turn on sound, is a switch for the "speak()" function
     window.activeSpeechSynthesis = true
     this.state = {
       name:'myname',
@@ -19,8 +21,10 @@ class App extends React.Component {
       keyboardIsOpen:false,
       keyboardType:0,
 
-      quiz: dummyQuiz,
+      //Data to run student quizzes
+      houses: houses,
 
+      //
       activeSpeechSynthesis:window.activeSpeechSynthesis,
 
       loginName:[],
@@ -32,22 +36,14 @@ class App extends React.Component {
     console.log(keyboardIconList)
   }
 
-  // setKeyboardTargetAndOpen = (target) => {
-  //   this.setState({keyboardIsOpen:true, keyboardIsWritingTo:target})
-  // }
-
+  //Allows the user to write to a specific value in the state
   keyboardWrite = (val) => {
     let newState = {...this.state}
     newState[this.state.keyboardIsWritingTo] = val
     this.setState(newState)
   }
 
-  // alterState = (key,value) => {
-  //   let newState = {...this.state}
-  //   newState[key] = value
-  //   this.setState(newState)
-  // }
-
+  //Turns off the TTS
   speechSynthesisToggle = () => {
     console.log(this.state, window.activeSpeechSynthesis)
     silence()
@@ -61,6 +57,7 @@ class App extends React.Component {
     this.setState({activeSpeechSynthesis: window.activeSpeechSynthesis})
   }
 
+  // this is a passable setState basically
   alterState = (alterObj) => {
     let newState = {...this.state}
     for(let key in alterObj){
@@ -72,7 +69,6 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
-       APP {this.state.loginName}
 
        <div class={`button MenuButton RoundedButton flexCenter ${this.state.menuIsOpen ? "cross":""}`} onClick={()=>{this.setState({menuIsOpen:!this.state.menuIsOpen})}}>
          <div class="MenuLine A"></div>
