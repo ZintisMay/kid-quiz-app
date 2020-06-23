@@ -1,27 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import './IconKeyboard.css';
 
+const capitalize = (s) => {
+  if (typeof s !== 'string') return ''
+  return s.charAt(0).toUpperCase() + s.slice(1)
+}
+
 function IconKeyboard(props) {
 
-  const [animalPhrase, setAnimalPhrase] = useState([]);
+  const [animalArray, setAnimalArray] = useState([]);
 
   function addAnimalIcon(word){
+  	window.speechSynthesis.cancel()
   	speak(word)
-		setAnimalPhrase([...animalPhrase, word])
+		setAnimalArray([...animalArray, word])
   }
 
   function removeAnimalIcon(index){
   	window.speechSynthesis.cancel()
-  	speak("no " + animalPhrase[index])
-		setAnimalPhrase([...animalPhrase.filter((x, ind)=>{return ind != index})])
+  	speak("no " + animalArray[index])
+		setAnimalArray([...animalArray.filter((x, ind)=>{return ind != index})])
   }
 
   function go(){
-  	speak(animalPhrase.join(" "))
+
+  	speak(animalArray.join(" "))
+
+  	props.keyboardWrite(animalArray.map((item)=>{
+  	 return capitalize(item);
+  	}).join(""))
+
+  	setTimeout(()=>{
+  		close()
+  	},1000)
   }
   
   function close(){
-  	props.alterState("keyBoardIsOpen", false)
+  	setAnimalArray([])
+  	props.alterState("keyboardIsOpen", false)
   }
 
   function speak(word){
@@ -29,46 +45,47 @@ function IconKeyboard(props) {
 		window.speechSynthesis.speak(msg);
   }
 
-    return (
-      <div className="IconKeyboard">
-				<div 
-					 	className="kidsKeyboardButton goButton" 
-					 	onClick={go}
-					 	style={{backgroundImage:`url(/checkmarkIcon.png)`}}
+  //Go button is in the corner with the closeButton
+  return (
+    <div className={`IconKeyboard ${props.keyboardIsOpen ? "onScreen":"offScreen"}`}>
+			<div 
+				 	className="button kidsKeyboardButton goButton" 
+				 	onClick={go}
+				 	style={{backgroundImage:`url(/checkmarkIcon.png)`}}
+				 	>
+			</div>
+			<div 
+				 	className="button kidsKeyboardButton closeButton" 
+				 	onClick={close}
+				 	style={{backgroundImage:`url(/xIcon.png)`}}
+				 	>
+			</div>
+			<div className="textArea">{animalArray.join(" ")}</div>
+			<div className="writingArea">
+        {animalArray.map((item, index)=>{
+	       	return (<div 
+		       	key={item}
+					 	className="button kidsKeyboardButton" 
+					 	onClick={()=>{removeAnimalIcon(index)}}
+					 	style={{backgroundImage:`url(/${item}Icon.png)`}}
 					 	>
-				</div>
-				<div 
-					 	className="kidsKeyboardButton closeButton" 
-					 	onClick={close}
-					 	style={{backgroundImage:`url(/xIcon.png)`}}
+					 </div>)
+	      })}
+			</div>
+			<div className="keyArea">
+        {props.keyboardIconList.map(item=>{
+	       	return (<div 
+		       	key={item}
+					 	className="button kidsKeyboardButton" 
+					 	onClick={()=>{addAnimalIcon(item)}}
+					 	style={{backgroundImage:`url(/${item}Icon.png)`}}
 					 	>
-				</div>
-				<div className="textArea">{animalPhrase.join(" ")}</div>
-				<div className="writingArea">
-          {animalPhrase.map((item, index)=>{
-		       	return (<div 
-			       	key={item}
-						 	className="kidsKeyboardButton" 
-						 	onClick={()=>{removeAnimalIcon(index)}}
-						 	style={{backgroundImage:`url(/${item}Icon.png)`}}
-						 	>
-						 </div>)
-		      })}
-				</div>
-				<div className="keyArea">
-          {props.keyboardIconList.map(item=>{
-		       	return (<div 
-			       	key={item}
-						 	className="kidsKeyboardButton" 
-						 	onClick={()=>{addAnimalIcon(item)}}
-						 	style={{backgroundImage:`url(/${item}Icon.png)`}}
-						 	>
-						 </div>)
-		      })}
-        </div>
-
+					 </div>)
+	      })}
       </div>
-    );
+
+    </div>
+  );
 
 }
 

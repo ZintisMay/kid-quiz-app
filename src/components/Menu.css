@@ -1,0 +1,22 @@
+.Menu.onScreen{
+	transform:translateY(100%);
+}
+.Menu.offScreen{
+	transform:translateY(0%);
+}
+
+.Menu{
+	position: fixed;
+	min-height:calc(8.5vw);
+	bottom:100%;
+	left:0;
+	width:97vw;
+	/*height:50vh;*/
+	background-color:#FFB347;
+	transition:.5s linear;
+
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: center;
+}

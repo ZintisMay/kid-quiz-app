@@ -1,11 +1,19 @@
+.IconKeyboard.onScreen{
+	transform:translateY(-100%);
+}
+.IconKeyboard.offScreen{
+	transform:translateY(0%);
+}
+
 .IconKeyboard{
 	position: fixed;
-	bottom:0;
+	top:100%;
 	left:0;
 	width:100vw;
 	/*height:50vh;*/
 	padding:5vh 0;
 	background-color:#FFB347;
+	transition:.5s linear ;
 }
 
 .writingArea, .keyArea, .textArea{
@@ -43,18 +51,15 @@
 	width:90%;
 	background-color: rgba(0,0,0,.3);
 }
+
 .kidsKeyboardButton{
-	margin:1vw;
-	height:8vw;
-	min-height:75px;
-	width:8vw;
-	min-width:75px;
-	border-radius:5px;
 	background-color:#72d3fe;
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
+	border-radius: 5px;
 }
+
 .goButton,
 .closeButton{
 	position: absolute;
@@ -62,10 +67,10 @@
 	bottom:-2vw;
 }
 .goButton{
-	left:-2vw;
+	left:-2.5vw;
 	background-color:#77dd77;
 }
 .closeButton{
-	right:-2vw;
+	right:-2.5vw;
 	background-color:red;
 }

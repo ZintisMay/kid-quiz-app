@@ -5,6 +5,57 @@
   background-color:#ff2015;
 }
 
+.button{
+  margin:1vw;
+  height:10vw;
+  min-height:75px;
+  width:10vw;
+  min-width:75px;
+}
+
+.flexCenter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.MenuButton{
+  position: fixed;
+  z-index: 1000;
+  top:-2.5vw;
+  right:-2.5vw;
+  border-radius: 50%;
+  background-color:white;
+}
+
+.MenuLine{
+  position: absolute;
+  height:3px;
+  width:50%;
+  background-color: black;
+  transition:.5s;
+}
+.MenuLine.A{
+  top:35%;
+}
+.MenuLine.B{
+  top:50%;
+}
+.MenuLine.C{
+  top:65%;
+}
+.MenuButton.cross .MenuLine.A{
+  top:50%;
+  transform:rotate(45deg);
+}
+.MenuButton.cross .MenuLine.B{
+  opacity: 0;
+}
+.MenuButton.cross .MenuLine.C{
+  top:50%;
+  transform:rotate(-45deg);
+}
+
 /**{outline:1px dotted black;}*/
 
 
