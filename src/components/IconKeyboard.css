@@ -49,13 +49,13 @@
 .kidsKeyboardButton.closeButton{
 	position: absolute;
 	z-index: 150;
-	bottom:-2vw;
+	bottom:-20px;
 }
 .kidsKeyboardButton.goButton{
-	left:-3vw;
+	left:-20px;
 	background-color:#77dd77;
 }
 .kidsKeyboardButton.closeButton{
-	right:-3vw;
+	right:-20px;
 	background-color:red;
 }

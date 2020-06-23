@@ -6,6 +6,7 @@ import {speak, silence} from './utils/speech.js'
 import './App.css';
 
 import keyboardIconList from './data/keyboardIconList'
+import dummyQuiz from './data/dummyQuiz'
 
 class App extends React.Component {
   constructor(props){
@@ -17,6 +18,8 @@ class App extends React.Component {
       keyboardIsWritingTo:"loginName",
       keyboardIsOpen:false,
       keyboardType:0,
+
+      quiz: dummyQuiz,
 
       activeSpeechSynthesis:window.activeSpeechSynthesis,
 
@@ -70,8 +73,6 @@ class App extends React.Component {
     return (
       <div className="App">
        APP {this.state.loginName}
-
-
 
        <div class={`button MenuButton RoundedButton flexCenter ${this.state.menuIsOpen ? "cross":""}`} onClick={()=>{this.setState({menuIsOpen:!this.state.menuIsOpen})}}>
          <div class="MenuLine A"></div>
