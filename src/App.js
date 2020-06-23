@@ -1,26 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
+import Login from './components/Login.js';
+import IconKeyboard from './components/IconKeyboard.js';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import keyboardIconList from './data/keyboardIconList'
+
+class App extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      name:'a',
+      keyBoardIsOpen:false,
+      keyBoardType:0
+    }
+    console.log(keyboardIconList)
+  }
+
+  alterState(newState){
+    this.setState(newState)
+  }
+
+  render(){
+    return (
+      <div className="App">
+       APP {this.state.name}
+       <button onClick={()=>{this.setState({keyBoardIsOpen:!this.state.keyBoardIsOpen})}}>Open Keyboard</button>
+       <Login alterState={this.alterState} />
+       {this.state.keyBoardIsOpen && <IconKeyboard keyboardIconList={keyboardIconList} />}
+      </div>
+    );
+  }
 }
 
 export default App;

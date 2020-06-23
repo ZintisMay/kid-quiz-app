@@ -1,0 +1,60 @@
+.IconKeyboard{
+	display: fixed;
+	bottom:0;
+	left:0;
+	width:100vw;
+	/*height:50vh;*/
+	padding:5vh 0;
+	background-color:#FFB347;
+}
+
+.writingArea, .keyArea, .textArea{
+	margin:0 auto;
+	width:90vw;
+}
+.textArea{
+	/*height:35px;*/
+	font-size:50px;
+	font-family: arial;
+	font-weight: 700;
+	letter-spacing: 2px;
+	word-spacing: 20px;
+}
+.writingArea{
+	min-height:120px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+.keyArea{
+	margin-top:20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	position: relative;
+}
+.keyArea:before{
+	position: absolute;
+	bottom:calc(100% + 10px);
+	content:"";
+	height:5px;
+	width:90%;
+	background-color: rgba(0,0,0,.3);
+}
+.kidsKeyboardButton{
+	margin:1vw;
+	height:10vw;
+	min-height:50px;
+	width:10vw;
+	min-width:50px;
+	border-radius:5px;
+	background-color:#72d3fe;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.goButton{
+	background-color:#77dd77;
+}
