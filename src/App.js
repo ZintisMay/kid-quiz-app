@@ -16,7 +16,9 @@ class App extends React.Component {
     console.log(keyboardIconList)
   }
 
-  alterState(newState){
+  alterState = (key,value) => {
+    let newState = {...this.state}
+    newState[key] = value
     this.setState(newState)
   }
 
@@ -26,7 +28,7 @@ class App extends React.Component {
        APP {this.state.name}
        <button onClick={()=>{this.setState({keyBoardIsOpen:!this.state.keyBoardIsOpen})}}>Open Keyboard</button>
        <Login alterState={this.alterState} />
-       {this.state.keyBoardIsOpen && <IconKeyboard keyboardIconList={keyboardIconList} />}
+       {this.state.keyBoardIsOpen && <IconKeyboard keyboardIconList={keyboardIconList} alterState = {this.alterState}/>}
       </div>
     );
   }

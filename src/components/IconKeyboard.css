@@ -1,5 +1,5 @@
 .IconKeyboard{
-	display: fixed;
+	position: fixed;
 	bottom:0;
 	left:0;
 	width:100vw;
@@ -55,6 +55,17 @@
 	background-repeat: no-repeat;
 	background-position: center;
 }
+.goButton,
+.closeButton{
+	position: absolute;
+	border-radius: 50%;
+	bottom:-2vw;
+}
 .goButton{
+	left:-2vw;
 	background-color:#77dd77;
+}
+.closeButton{
+	right:-2vw;
+	background-color:red;
 }

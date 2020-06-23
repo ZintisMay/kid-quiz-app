@@ -20,6 +20,10 @@ function IconKeyboard(props) {
   	speak(animalPhrase.join(" "))
   }
   
+  function close(){
+  	props.alterState("keyBoardIsOpen", false)
+  }
+
   function speak(word){
 		var msg = new SpeechSynthesisUtterance(word);
 		window.speechSynthesis.speak(msg);
@@ -27,14 +31,20 @@ function IconKeyboard(props) {
 
     return (
       <div className="IconKeyboard">
+				<div 
+					 	className="kidsKeyboardButton goButton" 
+					 	onClick={go}
+					 	style={{backgroundImage:`url(/checkmarkIcon.png)`}}
+					 	>
+				</div>
+				<div 
+					 	className="kidsKeyboardButton closeButton" 
+					 	onClick={close}
+					 	style={{backgroundImage:`url(/xIcon.png)`}}
+					 	>
+				</div>
 				<div className="textArea">{animalPhrase.join(" ")}</div>
 				<div className="writingArea">
-					<div 
-						 	className="kidsKeyboardButton goButton" 
-						 	onClick={go}
-						 	style={{backgroundImage:`url(/checkmarkIcon.png)`}}
-						 	>
-					</div>
           {animalPhrase.map((item, index)=>{
 		       	return (<div 
 			       	key={item}
