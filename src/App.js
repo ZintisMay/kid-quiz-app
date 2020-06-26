@@ -1,6 +1,7 @@
 import React from 'react';
 import Login from './components/Login.js';
 import Menu from './components/Menu.js';
+import Dashboard from './components/Dashboard.js';
 import IconKeyboard from './components/IconKeyboard.js';
 import {speak, silence} from './utils/speech.js'
 import './App.css';
@@ -17,9 +18,12 @@ class App extends React.Component {
     this.state = {
       name:'myname',
 
+      currentQuiz:false,
+
       keyboardIsWritingTo:"loginName",
       keyboardIsOpen:false,
       keyboardType:0,
+      keyboardIconList: keyboardIconList,
 
       //Data to run student quizzes
       houses: houses,
@@ -29,6 +33,8 @@ class App extends React.Component {
 
       loginName:[],
       loginHouse:[],
+      userIsLoggedIn:true,
+      dashboardIsOpen:true,
 
       loginIsOpen:false,
       menuIsOpen:false,
@@ -70,18 +76,22 @@ class App extends React.Component {
     return (
       <div className="App">
 
-       <div class={`button MenuButton RoundedButton flexCenter ${this.state.menuIsOpen ? "cross":""}`} onClick={()=>{this.setState({menuIsOpen:!this.state.menuIsOpen})}}>
-         <div class="MenuLine A"></div>
-         <div class="MenuLine B"></div>
-         <div class="MenuLine C"></div>
+       <div className={`button MenuButton RoundedButton flexCenter ${this.state.menuIsOpen ? "cross":""}`} onClick={ () => {this.setState({menuIsOpen:!this.state.menuIsOpen})}}>
+         <div className="MenuLine A"></div>
+         <div className="MenuLine B"></div>
+         <div className="MenuLine C"></div>
        </div>
 
 
-       <Login state={this.state} alterState={this.alterState}  setKeyboardTargetAndOpen={this.setKeyboardTargetAndOpen}/>
+       {!this.state.userIsLoggedIn && <Login state={this.state} alterState={this.alterState}  setKeyboardTargetAndOpen={this.setKeyboardTargetAndOpen}/>}
 
-       <Menu menuIsOpen={this.state.menuIsOpen} state={this.state} alterState = {this.alterState} speechSynthesisToggle={this.speechSynthesisToggle}/>
 
-       <IconKeyboard keyboardIsOpen={this.state.keyboardIsOpen} keyboardIconList={keyboardIconList} keyboardWrite={this.keyboardWrite} keyboardIsWritingTo={this.keyboardIsWritingTo} alterState = {this.alterState} state={this.state}/>
+     {/*Dashboard component, condition on login*/}
+       {this.state.userIsLoggedIn && this.state.dashboardIsOpen && !this.state.currentQuiz && <Dashboard state={this.state} alterState = {this.alterState}/>}
+
+       <Menu state={this.state} alterState = {this.alterState} speechSynthesisToggle={this.speechSynthesisToggle}/>
+
+       <IconKeyboard keyboardIsOpen={this.state.keyboardIsOpen} keyboardWrite={this.keyboardWrite} keyboardIsWritingTo={this.keyboardIsWritingTo} alterState = {this.alterState} state={this.state}/>
 
       </div>
     );

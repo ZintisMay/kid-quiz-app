@@ -80,7 +80,7 @@ function IconKeyboard(props) {
 	      })}
 			</div>
 			<div className="keyArea barAbove">
-        {props.keyboardIconList.map(item=>{
+        {props.state.keyboardIconList.map(item=>{
 	       	return (<div 
 		       	key={item}
 					 	className="button kidsKeyboardButton" 

@@ -33,7 +33,11 @@ function Login(props) {
       speak("Please enter your log in name")
     }else{
       speak("Attempting Log In")
-      props.alterState({loginIsOpen:false, keyboardIsWritingTo:""})
+
+      //makes an ajax call to check for login
+      props.alterState({loginIsOpen:false, keyboardIsWritingTo:"", userIsLoggedIn:true, dashboardIsOpen:true})
+
+      //throw error if failed, tell user
     }
   }
 
@@ -78,6 +82,7 @@ function Login(props) {
           {
             ['person','arrowRight','house'].map((item)=>{
               return (<div 
+                key={item}
                 onClick={login}
                 className="button kidsKeyboardButton category" 
                 style={{backgroundImage:`url(/${item}Icon.png)`}}

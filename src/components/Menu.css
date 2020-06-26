@@ -10,7 +10,7 @@
 	height:calc(75px);
 	bottom:100%;
 	left:0;
-	width:97vw;
+	width:calc(100vw - 30px);
 	/*height:50vh;*/
 	background-color:#FFB347;
 	transition:.5s linear;

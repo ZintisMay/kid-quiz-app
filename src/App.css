@@ -19,7 +19,16 @@ h1{
   min-width:75px;
   position: relative;
 }
-
+.row{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.flexCenter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .iconRow{
   position: relative;
   margin:20px;
@@ -123,5 +132,5 @@ div.RoundedButton{
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  border-radius: 5px;
+  border-radius: 10px;
 }
