@@ -1,7 +1,8 @@
-export const speak = (word) => {
+export const speak = (phrase) => {
 	if(window.activeSpeechSynthesis){
-		word = word.split(/(?=[A-Z])/);
-		var msg = new SpeechSynthesisUtterance(word);
+		//This splits camelcase into multiple words
+		phrase = phrase.split(/(?=[A-Z])/);
+		var msg = new SpeechSynthesisUtterance(phrase);
 		window.speechSynthesis.speak(msg);
 	}
 }

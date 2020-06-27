@@ -5,7 +5,7 @@
   background-color:#ff2015;
 }
 
-*{outline:1px dotted black;}
+/**{outline:1px dotted black;}*/
 
 h1{
   
@@ -22,12 +22,16 @@ h1{
 .row{
   display: flex;
   justify-content: space-around;
+  align-items: center;
   flex-wrap: wrap;
 }
 .flexCenter{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.flexCenter.col{
+  flex-direction: column;
 }
 .iconRow{
   position: relative;
@@ -90,9 +94,9 @@ div.RoundedButton{
 
 .MenuButton{
   position: fixed;
-  z-index: 1000;
-  top:-25px;
-  right:-25px;
+  z-index: 1000000;
+  top:-20px;
+  right:-20px;
   background-color:white;
 }
 
@@ -133,4 +137,29 @@ div.RoundedButton{
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 10px;
+}
+
+.Quiz, .HouseDashboard{
+  padding-top:80px;
+  width:100%;
+  height:100%;
+  position: fixed;
+  top:0;
+  left:0;
+  background-color:gray;
+  z-index: 10000;
+}
+
+.Quiz{
+  z-index: 20000;
+}
+
+.kidsKeyboardButton.goBack{
+  position: fixed;
+  background-size: 80%;
+  background-color:lightblue;
+}
+
+.highlightBox{
+  box-shadow: 0 0 20px white, 0 0 10px white, 0 0 6px white, 0 0 3px white;
 }

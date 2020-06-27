@@ -12,7 +12,7 @@ function Menu(props) {
     <div className={`Menu ${props.state.menuIsOpen ? "onScreen" : "offScreen"}`}>
 
       <div className=" button kidsKeyboardButton loginBigIcon" style={{ backgroundImage: `url(/loginBigIcon.png)` }} onClick={() => {
-        speak("Log in")
+        props.state.loginIsOpen ? speak("Closing Log In") : speak("Log in");
         props.alterState({
           loginIsOpen: !props.state.loginIsOpen
         })

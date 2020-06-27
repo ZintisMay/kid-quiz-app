@@ -35,7 +35,7 @@ function Login(props) {
       speak("Attempting Log In")
 
       //makes an ajax call to check for login
-      props.alterState({loginIsOpen:false, keyboardIsWritingTo:"", userIsLoggedIn:true, dashboardIsOpen:true})
+      props.alterState({loginIsOpen:false, keyboardIsWritingTo:"", userIsLoggedIn:true, dashboardIsOpen:true, menuIsOpen: false})
 
       //throw error if failed, tell user
     }

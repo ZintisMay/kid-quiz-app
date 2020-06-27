@@ -2,8 +2,11 @@ import React from 'react';
 import Login from './components/Login.js';
 import Menu from './components/Menu.js';
 import Dashboard from './components/Dashboard.js';
+import HouseDashboard from './components/HouseDashboard.js';
+import Quiz from './components/Quiz.js';
 import IconKeyboard from './components/IconKeyboard.js';
-import {speak, silence} from './utils/speech.js'
+import { speak, silence } from './utils/speech.js'
+import { mapObj } from './utils/utils.js'
 import './App.css';
 
 import keyboardIconList from './data/keyboardIconList'
@@ -11,40 +14,44 @@ import houses from './data/houses.js'
 
 class App extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props)
     //Turn on sound, is a switch for the "speak()" function
     window.activeSpeechSynthesis = true
     this.state = {
-      name:'myname',
+      name: 'myname',
 
-      currentQuiz:false,
+      currentHouse: null,
+      currentQuiz: false,
 
-      keyboardIsWritingTo:"loginName",
-      keyboardIsOpen:false,
-      keyboardType:0,
+      keyboardIsWritingTo: "loginName",
+      keyboardIsOpen: false,
+      keyboardType: 0,
       keyboardIconList: keyboardIconList,
 
       //Data to run student quizzes
       houses: houses,
 
-      //
-      activeSpeechSynthesis:window.activeSpeechSynthesis,
+      activeSpeechSynthesis: window.activeSpeechSynthesis,
 
-      loginName:[],
-      loginHouse:[],
-      userIsLoggedIn:true,
-      dashboardIsOpen:true,
+      loginName: [],
+      loginHouse: [],
+      userIsLoggedIn: false,
+      dashboardIsOpen: false,
 
-      loginIsOpen:false,
-      menuIsOpen:false,
+      quizIsOpen: false,
+      loginIsOpen: false,
+      menuIsOpen: true,
     }
     console.log(keyboardIconList)
+
+
+
   }
 
   //Allows the user to write to a specific value in the state
   keyboardWrite = (val) => {
-    let newState = {...this.state}
+    let newState = { ...this.state }
     newState[this.state.keyboardIsWritingTo] = val
     this.setState(newState)
   }
@@ -53,45 +60,47 @@ class App extends React.Component {
   speechSynthesisToggle = () => {
     console.log(this.state, window.activeSpeechSynthesis)
     silence()
-    if(window.activeSpeechSynthesis){
+    if (window.activeSpeechSynthesis) {
       speak("sound off")
       window.activeSpeechSynthesis = false
-    }else{
+    } else {
       window.activeSpeechSynthesis = true
       speak("sound on")
     }
-    this.setState({activeSpeechSynthesis: window.activeSpeechSynthesis})
+    this.setState({ activeSpeechSynthesis: window.activeSpeechSynthesis })
   }
 
   // this is a passable setState basically
   alterState = (alterObj) => {
-    let newState = {...this.state}
-    for(let key in alterObj){
+    let newState = { ...this.state }
+    for (let key in alterObj) {
       newState[key] = alterObj[key]
     }
     this.setState(newState)
   }
 
-  render(){
+  render() {
     return (
       <div className="App">
 
-       <div className={`button MenuButton RoundedButton flexCenter ${this.state.menuIsOpen ? "cross":""}`} onClick={ () => {this.setState({menuIsOpen:!this.state.menuIsOpen})}}>
-         <div className="MenuLine A"></div>
-         <div className="MenuLine B"></div>
-         <div className="MenuLine C"></div>
-       </div>
+        <div className={`button MenuButton RoundedButton flexCenter ${this.state.menuIsOpen ? "cross" : ""}`} onClick={() => { this.setState({ menuIsOpen: !this.state.menuIsOpen }) }}>
+          <div className="MenuLine A"></div>
+          <div className="MenuLine B"></div>
+          <div className="MenuLine C"></div>
+        </div>
 
+        {this.state.currentQuiz && <Quiz state={this.state} alterState={this.alterState} />}
 
-       {!this.state.userIsLoggedIn && <Login state={this.state} alterState={this.alterState}  setKeyboardTargetAndOpen={this.setKeyboardTargetAndOpen}/>}
+        {this.state.currentHouse && <HouseDashboard state={this.state} alterState={this.alterState} />}
 
+        {!this.state.userIsLoggedIn && <Login state={this.state} alterState={this.alterState} />}
 
-     {/*Dashboard component, condition on login*/}
-       {this.state.userIsLoggedIn && this.state.dashboardIsOpen && !this.state.currentQuiz && <Dashboard state={this.state} alterState = {this.alterState}/>}
+        {/*Dashboard component, condition on login*/}
+        {this.state.userIsLoggedIn && this.state.dashboardIsOpen && !this.state.currentQuiz && <Dashboard state={this.state} alterState={this.alterState} />}
 
-       <Menu state={this.state} alterState = {this.alterState} speechSynthesisToggle={this.speechSynthesisToggle}/>
+        <Menu state={this.state} alterState={this.alterState} speechSynthesisToggle={this.speechSynthesisToggle} />
 
-       <IconKeyboard keyboardIsOpen={this.state.keyboardIsOpen} keyboardWrite={this.keyboardWrite} keyboardIsWritingTo={this.keyboardIsWritingTo} alterState = {this.alterState} state={this.state}/>
+        <IconKeyboard keyboardIsOpen={this.state.keyboardIsOpen} keyboardWrite={this.keyboardWrite} keyboardIsWritingTo={this.keyboardIsWritingTo} alterState={this.alterState} state={this.state} />
 
       </div>
     );
