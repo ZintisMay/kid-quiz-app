@@ -22,8 +22,7 @@ function HouseDashboard(props) {
 			// console.log(`quiz ${quizKey}`)
 			// console.log("props.state.currentHouse.quizzes[quizKey]")
 			// console.log(props.state.currentHouse.quizzes[quizKey].summary)
-			speak(`quiz ${quizKey}`)
-			speak(props.state.currentHouse.quizzes[quizKey].summary)
+			speak(`${quizKey}, ${props.state.currentHouse.quizzes[quizKey].summary}`)
 			setPossibleQuizKey(quizKey)
 		}
 	}
