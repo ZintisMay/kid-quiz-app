@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { speak, silence } from '../utils/speech.js';
 import './Menu.css';
 
-// import './Menu.css';
-
 function Menu(props) {
   // const [count, setCount] = useState(0);
 
@@ -63,7 +61,6 @@ function Menu(props) {
       </div>
     </div>
   );
-
 }
 
 export default Menu;

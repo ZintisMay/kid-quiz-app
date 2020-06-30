@@ -1,14 +1,18 @@
 .Dashboard{
-	width:80%;
+	background-color:blue;
+	height:calc(98% - 80px);
+	width:90%;
+	padding-left:5%;
+	padding-right:5%;
 	position: fixed;
 	top:100px;
 	left:50%;
 	transform:translateX(-50%);
-	/*min-height: calc(100vh - 150px);*/
 	display: flex;
 	justify-content: flex-start;
 	align-items:flex-start;
 	flex-wrap: wrap;
+	overflow-y: auto;
 
 }
 .HousePanel{

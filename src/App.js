@@ -1,13 +1,13 @@
-import React from 'react';
-import Login from './components/Login.js';
-import Menu from './components/Menu.js';
-import Dashboard from './components/Dashboard.js';
-import HouseDashboard from './components/HouseDashboard.js';
-import Quiz from './components/Quiz.js';
-import IconKeyboard from './components/IconKeyboard.js';
+import React from 'react'
+import Login from './components/Login.js'
+import Menu from './components/Menu.js'
+import Dashboard from './components/Dashboard.js'
+import HouseDashboard from './components/HouseDashboard.js'
+import Quiz from './components/Quiz.js'
+import IconKeyboard from './components/IconKeyboard.js'
 import { speak, silence } from './utils/speech.js'
 import { mapObj } from './utils/utils.js'
-import './App.css';
+import './App.css'
 
 import keyboardIconList from './data/keyboardIconList'
 import houses from './data/houses.js'
@@ -21,12 +21,12 @@ class App extends React.Component {
     this.state = {
       name: 'myname',
 
-      currentHouse: null,
+      currentHouse: houses["BigDog"],
       currentQuiz: false,
+      currentQuizQuestionIndex:null,
 
       keyboardIsWritingTo: "loginName",
       keyboardIsOpen: false,
-      keyboardType: 0,
       keyboardIconList: keyboardIconList,
 
       //Data to run student quizzes
@@ -34,20 +34,24 @@ class App extends React.Component {
 
       activeSpeechSynthesis: window.activeSpeechSynthesis,
 
-      loginName: [],
-      loginHouse: [],
-      userIsLoggedIn: false,
-      dashboardIsOpen: false,
+      loginName: ["cat","dog"],
+      loginHouse: ["cat","dog"],
+      userIsLoggedIn: true,
+      dashboardIsOpen: true,
 
       quizIsOpen: false,
       loginIsOpen: false,
       menuIsOpen: true,
     }
-    console.log(keyboardIconList)
-
-
-
+    // console.log(keyboardIconList)
   }
+
+
+  componentDidUpdate = () => {
+    // console.log("this.state")
+    // console.log(this.state)
+  }
+
 
   //Allows the user to write to a specific value in the state
   keyboardWrite = (val) => {
@@ -58,7 +62,7 @@ class App extends React.Component {
 
   //Turns off the TTS
   speechSynthesisToggle = () => {
-    console.log(this.state, window.activeSpeechSynthesis)
+    // console.log(this.state, window.activeSpeechSynthesis)
     silence()
     if (window.activeSpeechSynthesis) {
       speak("sound off")
@@ -103,8 +107,8 @@ class App extends React.Component {
         <IconKeyboard keyboardIsOpen={this.state.keyboardIsOpen} keyboardWrite={this.keyboardWrite} keyboardIsWritingTo={this.keyboardIsWritingTo} alterState={this.alterState} state={this.state} />
 
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App

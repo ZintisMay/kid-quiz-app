@@ -1,15 +1,18 @@
 .HouseDashboard{
 	position: fixed;
+  background-color: gray;
+  overflow-y: auto;
 }
 .quizPanel{
-	height:150px;
-	width:300px;
-	background-color:orange;
+	margin:10px;
+	height: 150px;
+	width: 300px;
+	background-color: orange;
 	border-radius: 10px;
 }
 div.goBack{
   position: fixed;
-  bottom:-20px;
-  left:-20px;
-  z-index:15000;
+  bottom: -20px;
+  left: -20px;
+  z-index: 15000;
 }

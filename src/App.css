@@ -1,23 +1,30 @@
 .App {
   text-align: center;
-  height:100vh;
-  width:100vw;
-  background-color:#ff2015;
+  height: 100vh;
+  width: 100vw;
+  background-color: #ff2015;
 }
 
-/**{outline:1px dotted black;}*/
+*{outline: 1px dotted black;}
 
 h1{
   
 }
 
 .button{
-  margin:5px;
-  height:95px;
-  min-height:75px;
-  width:95px;
-  min-width:75px;
+  margin: 5px;
+  height: 95px;
+  min-height: 75px;
+  width: 95px;
+  min-width: 75px;
   position: relative;
+}
+.flex{
+  display: flex;
+}
+.center{
+  justify-content: center;
+  align-items: center;
 }
 .row{
   display: flex;
@@ -35,50 +42,50 @@ h1{
 }
 .iconRow{
   position: relative;
-  margin:20px;
-  width:80%;
+  margin: 20px;
+  width: 80%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  height:100px;
+  height: 100px;
   border-width: 5px;
-  border-top:rgba(0,0,0,.5);
-  border-bottom:rgba(0,0,0,.5);
+  border-top: rgba(0,0,0,.5);
+  border-bottom: rgba(0,0,0,.5);
 }
 
 /*Flashing Button on Click*/
-.button:after {
+.button: after {
   pointer-events: none;
   content: "";
   background: #90EE90;
   display: block;
   position: absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   opacity: 0;
-  width:0%;
-  height:0%;
+  width: 0%;
+  height: 0%;
   transition: all 0.8s
 }
-.button.RoundedButton:after{
+.button.RoundedButton: after{
   border-radius: 50%;
 }
-.button:active:after {
+.button: active: after {
   opacity: .5;
   transition: 0s;
-  width:100%;
-  height:100%;
+  width: 100%;
+  height: 100%;
 }
 
-.barAbove:before{
+.barAbove: before{
   position: absolute;
-  bottom:calc(100% + 15px);
-  left:50%;
-  transform:translate(-50%,-50%);
-  content:"";
-  height:5px;
-  width:90%;
+  bottom: calc(100% + 15px);
+  left: 50%;
+  transform: translate(-50%,-50%);
+  content: "";
+  height: 5px;
+  width: 90%;
   background-color: rgba(0,0,0,.3);
 }
 
@@ -95,44 +102,44 @@ div.RoundedButton{
 .MenuButton{
   position: fixed;
   z-index: 1000000;
-  top:-20px;
-  right:-20px;
-  background-color:white;
+  top: -20px;
+  right: -20px;
+  background-color: white;
 }
 
 .MenuLine{
   position: absolute;
-  height:3px;
-  width:50%;
+  height: 3px;
+  width: 50%;
   background-color: black;
-  transition:.5s;
+  transition: .5s;
 }
 .MenuLine.A{
-  top:35%;
+  top: 35%;
 }
 .MenuLine.B{
-  top:50%;
+  top: 50%;
 }
 .MenuLine.C{
-  top:65%;
+  top: 65%;
 }
 .MenuButton.cross .MenuLine.A{
-  top:50%;
-  transform:rotate(45deg);
+  top: 50%;
+  transform: rotate(45deg);
 }
 .MenuButton.cross .MenuLine.B{
   opacity: 0;
 }
 .MenuButton.cross .MenuLine.C{
-  top:50%;
-  transform:rotate(-45deg);
+  top: 50%;
+  transform: rotate(-45deg);
 }
 
-/**{outline:1px dotted black;}*/
+/**{outline: 1px dotted black;}*/
 
 
 .kidsKeyboardButton{
-  background-color:#72d3fe;
+  background-color: #72d3fe;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -140,13 +147,15 @@ div.RoundedButton{
 }
 
 .Quiz, .HouseDashboard{
-  padding-top:80px;
-  width:100%;
-  height:100%;
+  padding-top: 80px;
+  padding-right: 5%;
+  padding-bottom: 40px;
+  padding-left: 5%;
+  width: 90%;
+  height: calc(100% - 120px);
   position: fixed;
-  top:0;
-  left:0;
-  background-color:gray;
+  top: 0;
+  left: 0;
   z-index: 10000;
 }
 
@@ -157,7 +166,7 @@ div.RoundedButton{
 .kidsKeyboardButton.goBack{
   position: fixed;
   background-size: 80%;
-  background-color:lightblue;
+  background-color: lightblue;
 }
 
 .highlightBox{
