@@ -15,8 +15,13 @@ const HousePanel = (props) => {
 
 					let quiz = quizzes[quizKey]
 
-					return (<div key={index} className={`quizIcon flexCenter`} onClick={(e) => { props.selectQuiz(e.target.textContent, props.houseKey) }}>{quiz.name}</div>)
-				})}
+					return (<div 
+						key={index} 
+						className={`quizIcon flexCenter`} 
+						// onClick={(e) => { props.selectQuiz(e.target.textContent, props.houseKey) }}
+						>{quiz.name}</div>)
+					})
+				}
 				{quizNames.length > 4 && `...and ${quizNames.length - 4} more`}
 			</div>
 		</div>
@@ -39,17 +44,17 @@ function Dashboard(props) {
 		}
 	}
 
-	const selectQuiz = (quizName, houseName) => {
-		// if (selectedQuiz == quizName) {
-		let theQuiz = props.state.houses[houseName].quizzes[quizName]
-		speak("starting " + quizName)
-		props.alterState({ currentQuiz: theQuiz })
-		// setSelectedQuiz(null)
-		// }else{
-		// setSelectedQuiz(quizName)
-		// speak("selecting " + quizName)
-		// }
-	}
+	// const selectQuiz = (quizName, houseName) => {
+	// 	// if (selectedQuiz == quizName) {
+	// 	let theQuiz = props.state.houses[houseName].quizzes[quizName]
+	// 	speak("starting " + quizName)
+	// 	props.alterState({ currentQuiz: theQuiz })
+	// 	// setSelectedQuiz(null)
+	// 	// }else{
+	// 	// setSelectedQuiz(quizName)
+	// 	// speak("selecting " + quizName)
+	// 	// }
+	// }
 
 	return (
 
@@ -57,8 +62,15 @@ function Dashboard(props) {
 			{Object.keys(props.state.houses).map((houseKey, index) => {
 				let house = props.state.houses[houseKey]
 				// console.log(house.name)
-				return (<HousePanel possibleHouse={possibleHouse} setCurrentHouse={setCurrentHouse} selectQuiz={selectQuiz} houseKey={houseKey} key={index} houseKey={houseKey} house={house} />)
-			})}
+				return (<HousePanel 
+					possibleHouse={possibleHouse} 
+					setCurrentHouse={setCurrentHouse} 
+					// selectQuiz={selectQuiz} 
+					houseKey={houseKey} 
+					key={index} 
+					houseKey={houseKey} 
+					house={house} />)
+				})}
 		</div>
 	);
 

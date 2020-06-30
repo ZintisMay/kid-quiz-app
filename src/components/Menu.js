@@ -24,15 +24,15 @@ function Menu(props) {
       </div>
 
       <div className="iconRow MenuCredentials">
-        {!!props.state.loginName.length &&
+        {!!props.state.loginSign.length &&
           <div
             className="button kidsKeyboardButton category"
             style={{ backgroundImage: `url(/personIcon.png)` }}
-            onClick={() => { silence(); speak("name") }}
+            onClick={() => { silence(); speak(["my sign is ",...props.state.loginSign]) }}
           >
           </div>
         }
-        {props.state.loginName.map(item => {
+        {props.state.loginSign.map(item => {
           return (<div
             key={item}
             className="button kidsKeyboardButton"
@@ -45,7 +45,7 @@ function Menu(props) {
           <div
             className="button kidsKeyboardButton category"
             style={{ backgroundImage: `url(/houseIcon.png)` }}
-            onClick={() => { silence(); speak("house") }}
+            onClick={() => { silence(); speak(["my house is ",...props.state.loginHouse]) }}
           >
           </div>
         }

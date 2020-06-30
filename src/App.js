@@ -21,11 +21,11 @@ class App extends React.Component {
     this.state = {
       name: 'myname',
 
-      currentHouse: houses["BigDog"],
+      currentHouse: null,
       currentQuiz: false,
       currentQuizQuestionIndex:null,
 
-      keyboardIsWritingTo: "loginName",
+      keyboardIsWritingTo: "loginSign",
       keyboardIsOpen: false,
       keyboardIconList: keyboardIconList,
 
@@ -34,22 +34,52 @@ class App extends React.Component {
 
       activeSpeechSynthesis: window.activeSpeechSynthesis,
 
-      loginName: ["cat","dog"],
-      loginHouse: ["cat","dog"],
-      userIsLoggedIn: true,
-      dashboardIsOpen: true,
+      realName: "Bobby",
+      loginSign: [],
+      loginHouse: [],
+      userIsLoggedIn: false,
+      dashboardIsOpen: false,
 
       quizIsOpen: false,
       loginIsOpen: false,
       menuIsOpen: true,
     }
-    // console.log(keyboardIconList)
+
+    // this.state = {
+    //   name: 'myname',
+
+    //   currentHouse: houses["BigDog"],
+    //   currentQuiz: false,
+    //   currentQuizQuestionIndex:null,
+
+    //   keyboardIsWritingTo: "loginSign",
+    //   keyboardIsOpen: false,
+    //   keyboardIconList: keyboardIconList,
+
+    //   //Data to run student quizzes
+    //   houses: houses,
+
+    //   activeSpeechSynthesis: window.activeSpeechSynthesis,
+
+    //   realName: "Bobby",
+    //   loginSign: ["cat","dog"],
+    //   loginHouse: ["cat","dog"],
+
+    //   userIsLoggedIn: true,
+    //   dashboardIsOpen: true,
+
+    //   quizIsOpen: false,
+    //   loginIsOpen: false,
+    //   menuIsOpen: true,
+    // }
+
+
   }
 
 
   componentDidUpdate = () => {
-    // console.log("this.state")
-    // console.log(this.state)
+    console.log("this.state")
+    console.log(this.state)
   }
 
 
@@ -82,6 +112,7 @@ class App extends React.Component {
     }
     this.setState(newState)
   }
+
 
   render() {
     return (

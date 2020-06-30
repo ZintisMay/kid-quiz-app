@@ -13,8 +13,8 @@ function Login(props) {
 
   const enterName = () => {
     silence()
-    speak("Please Enter Your Name")
-    props.alterState({ keyboardIsOpen: true, keyboardIsWritingTo: "loginName" })
+    speak("Please Enter Your Sign")
+    props.alterState({ keyboardIsOpen: true, keyboardIsWritingTo: "loginSign" })
   }
 
   const enterHouse = () => {
@@ -25,12 +25,12 @@ function Login(props) {
 
   const login = () => {
     silence()
-    if (!props.state.loginName.length && !props.state.loginHouse.length) {
-      speak("Please enter a name and house")
+    if (!props.state.loginSign.length && !props.state.loginHouse.length) {
+      speak("Please enter a sign and house")
     } else if (!props.state.loginHouse.length) {
       speak("Please enter your house")
-    } else if (!props.state.loginName.length) {
-      speak("Please enter your log in name")
+    } else if (!props.state.loginSign.length) {
+      speak("Please enter your log in sign")
     } else {
       speak("Attempting Log In")
 
@@ -51,7 +51,7 @@ function Login(props) {
           style={{ backgroundImage: `url(/personIcon.png)` }}
         >
         </div>
-        {props.state.loginName.map(item => {
+        {props.state.loginSign.map(item => {
           return (<div
             key={item}
             className="button kidsKeyboardButton"

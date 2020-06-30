@@ -5,48 +5,75 @@ import { capitalize } from '../utils/utils.js'
 
 const Quiz = (props) => {
 
-	// const answerColors = ["red", "blue", "purple", "orange"]
-
 	const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 	const [answerToSelect, setAnswerToSelect] = useState(null);
-	
 	const theQuiz = props.state.currentQuiz
 	const theQuestion = theQuiz.questions[currentQuestionIndex]
 
-	if (props.state.currentQuiz && window.speechSynthesis.activeSpeechSynthesis) {
-		// console.log(props.state.currentQuiz.name)
-		// speak(`Starting Quiz ${props.state.currentQuiz.name}`)
+	// console.log(props.state.currentQuiz)
+
+	if (theQuiz && window.speechSynthesis.activeSpeechSynthesis) {
+		speak(`Starting Quiz ${theQuiz.name}`)
 	}
+
 	let answerQuestion = (questionIndex, answerIndex) => {
 		console.log(questionIndex, answerIndex)
-		// theQuestion.answersByUser[props.state.]
 		speak(theQuestion.answers[answerIndex])
-		nextQuestion()
+
 	}
+
+	let selectAnswer = (questionIndex, answerIndex) => {
+
+		//Second click? Go!
+		if (answerToSelect == answerIndex) {
+			if(theQuestion.correctAnswerIndex == answerToSelect){
+				silence()
+				speak(`${theQuestion.answers[answerIndex]} is correct!`)
+			}else{
+				silence()
+				speak(`The answer is ${theQuestion.answers[theQuestion.correctAnswerIndex]}`)
+			}
+			theQuestion.answersByUser[props.state.realName] = answerIndex
+			setTimeout(nextQuestion,1000)
+			
+		//First click? speak it aloud
+		} else {
+			silence()
+			speak(`${theQuestion.answers[answerIndex]}`)
+			setAnswerToSelect(answerIndex)
+		}
+		
+	}
+
 	let nextQuestion = () => {
 		setCurrentQuestionIndex(currentQuestionIndex + 1)
+		setAnswerToSelect(null)
 	}
+
 	let prevQuestion = () => {
 		setCurrentQuestionIndex(currentQuestionIndex - 1)
+		setAnswerToSelect(null)
 	}
+
 	let goBack = () => {
 		silence()
 		speak("returning to quiz list")
 		props.alterState({ currentQuiz: null })
 	}
+
 	return (
 		<div className={`Quiz ${props.state.quizIsOpen ? "open" : ""}`}>
 
+			{}
+
 			<div class="quizQuestion flex center" onClick={()=>{speak(theQuestion.prompt[0])}}>{theQuestion.prompt[0]}</div>
-			<div class="quizAnswers row">
+			<div class="quizAnswers">
 				{
-					props.state.currentQuiz.questions[currentQuestionIndex].answers.map((item, answerIndex) => {
-						return <div class="quizAnswer flex center" key={answerIndex} onClick={() => { answerQuestion(currentQuestionIndex, answerIndex) }}>{item}</div>
+					theQuiz.questions[currentQuestionIndex].answers.map((item, answerIndex) => {
+						return <div className={`quizAnswer flex center ${answerIndex == answerToSelect ? 'highlightBox':''}`} key={answerIndex} onClick={() => { selectAnswer(currentQuestionIndex, answerIndex) }}>{item}</div>
 					})
 
 				}
-
-
 			</div>
 
 			<div
