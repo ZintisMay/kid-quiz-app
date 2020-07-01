@@ -5,10 +5,11 @@ import { capitalize } from '../utils/utils.js'
 
 function Login(props) {
 
-  const [count, setCount] = useState(0);
+  const [unOpened, setUnOpened] = useState(true);
 
-  if (props.state.loginIsOpen && !window.speechSynthesis.speaking) {
-    speak("Please enter a name and house, then press the arrow")
+  if (props.state.loginIsOpen && unOpened && !window.speechSynthesis.speaking) {
+    speak("Please enter a sign and house, then press the arrow")
+    setUnOpened(false)
   }
 
   const enterName = () => {

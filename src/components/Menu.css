@@ -23,7 +23,7 @@
 }
 
 .iconRow.MenuCredentials{
-	position: absolute;
+	position: fixed;
 	height:50px;
 	top:100%;
 	margin:10px;

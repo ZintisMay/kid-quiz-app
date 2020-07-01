@@ -41,7 +41,7 @@ class App extends React.Component {
       dashboardIsOpen: false,
 
       quizIsOpen: false,
-      loginIsOpen: false,
+      loginIsOpen: true,
       menuIsOpen: true,
     }
 

@@ -7,6 +7,7 @@ const Quiz = (props) => {
 
 	const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 	const [answerToSelect, setAnswerToSelect] = useState(null);
+	const [quizComplete, setQuizComplete] = useState(false);
 	const theQuiz = props.state.currentQuiz
 	const theQuestion = theQuiz.questions[currentQuestionIndex]
 
@@ -26,28 +27,32 @@ const Quiz = (props) => {
 
 		//Second click? Go!
 		if (answerToSelect == answerIndex) {
-			if(theQuestion.correctAnswerIndex == answerToSelect){
+			if (theQuestion.correctAnswerIndex == answerToSelect) {
 				silence()
-				speak(`${theQuestion.answers[answerIndex]} is correct!`)
-			}else{
+				speak(`correct!`)
+			} else {
 				silence()
 				speak(`The answer is ${theQuestion.answers[theQuestion.correctAnswerIndex]}`)
 			}
 			theQuestion.answersByUser[props.state.realName] = answerIndex
-			setTimeout(nextQuestion,1000)
-			
-		//First click? speak it aloud
+			setTimeout(nextQuestion, 1000)
+
+			//First click? speak it aloud
 		} else {
 			silence()
 			speak(`${theQuestion.answers[answerIndex]}`)
 			setAnswerToSelect(answerIndex)
 		}
-		
+
 	}
 
 	let nextQuestion = () => {
-		setCurrentQuestionIndex(currentQuestionIndex + 1)
-		setAnswerToSelect(null)
+			let nextIndex = currentQuestionIndex + 1
+			setCurrentQuestionIndex(nextIndex)
+			setAnswerToSelect(null)
+			if(nextIndex >= theQuiz.questions.length){
+				setQuizComplete(true)
+			}
 	}
 
 	let prevQuestion = () => {
@@ -64,17 +69,31 @@ const Quiz = (props) => {
 	return (
 		<div className={`Quiz ${props.state.quizIsOpen ? "open" : ""}`}>
 
-			{}
+			{theQuestion && 
+				<div className="quizQuestion flex center" onClick={() => { speak(theQuestion.prompt[0]) }}>
+					{theQuestion.prompt[0]}
+				</div>
+			}
+			{theQuestion && 
+				<div class="quizAnswers">
+					{
+						theQuiz.questions[currentQuestionIndex].answers.map((item, answerIndex) => {
+							return <div className={`quizAnswer flex center ${answerIndex == answerToSelect ? 'highlightBox' : ''}`} key={answerIndex} onClick={() => { selectAnswer(currentQuestionIndex, answerIndex) }}>{item}</div>
+						})
 
-			<div class="quizQuestion flex center" onClick={()=>{speak(theQuestion.prompt[0])}}>{theQuestion.prompt[0]}</div>
-			<div class="quizAnswers">
-				{
-					theQuiz.questions[currentQuestionIndex].answers.map((item, answerIndex) => {
-						return <div className={`quizAnswer flex center ${answerIndex == answerToSelect ? 'highlightBox':''}`} key={answerIndex} onClick={() => { selectAnswer(currentQuestionIndex, answerIndex) }}>{item}</div>
-					})
+					}
+				</div>
+			}
 
-				}
-			</div>
+			{quizComplete && <div class="quizResults">
+
+					<h1 onClick={(e)=>{speak(e.target.textContent)}}>You finished!</h1>
+					<p onClick={(e)=>{speak(e.target.textContent)}}>You got {theQuiz.questions.reduce( (a, question) => {return a + (question.correctAnswerIndex == question.answersByUser[props.state.realName] ? 1 : 0)}, 0)} questions of {theQuiz.questions.length} correct.</p>
+
+				</div>
+			}
+
+
 
 			<div
 				className="button kidsKeyboardButton RoundedButton goButton goBack"
@@ -82,6 +101,7 @@ const Quiz = (props) => {
 				style={{ backgroundImage: `url(/arrowLeftIcon.png)` }}
 			>
 			</div>
+
 		</div>
 	)
 
